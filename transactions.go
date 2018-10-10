@@ -40,14 +40,14 @@ func GetTransaction(w http.ResponseWriter, r *http.Request) {
 }
 
 // create a new item
-func CreateTransaction(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	var transaction Transaction
-	_ = json.NewDecoder(r.Body).Decode(&transaction)
-	transaction.ID = params["id"]
-	transactions = append(transactions, transaction)
-	json.NewEncoder(w).Encode(transactions)
-}
+//func CreateTransaction(w http.ResponseWriter, r *http.Request) {
+//	params := mux.Vars(r)
+//	var transaction Transaction
+//	_ = json.NewDecoder(r.Body).Decode(&transaction)
+//	transaction.ID = params["id"]
+//	transactions = append(transactions, transaction)
+//	json.NewEncoder(w).Encode(transactions)
+//}
 
 // main function to boot up everything
 func main() {
@@ -56,6 +56,6 @@ func main() {
 	transactions = append(transactions, Transaction{ID: "2", Payee: "John", Date: "05/09/2019", Payment: &Payment{Amount: "£200.00", Status: "Processed"}})
 	router.HandleFunc("/transactions", Transactions).Methods("GET")
 	router.HandleFunc("/transactions/{id}", GetTransaction).Methods("GET")
-	router.HandleFunc("/transactions/{id}", CreateTransaction).Methods("POST")
-	log.Fatal(http.ListenAndServe(":8000", router))
+	//router.HandleFunc("/transactions/{id}", CreateTransaction).Methods("POST")
+	log.Fatal(http.ListenAndServe(":8001", router))
 }
